@@ -14,23 +14,21 @@ jps
 > cd ..
 
 ## Create a folder in hdfs
-> hdfs dfs -mkdir /name/<path-of-dir>
+> hdfs dfs -mkdir /name/<path_of_dir>
 
 ## copy data from local to hdfs
->hdfs dfs -put <local-dir-path> <hdfs-path>
+>hdfs dfs -put <local-dir-path> <hdfs_path>
 <br>eg; hdfs dfs -put /config/workspace/fsds/data.
 txt /test
 
 or
 
->hfds dfs -copyFromLocal <local-dir-path> <hdfs-path>
-
-Eg; hfds dfs -copyFromLocal /config/workspace/trees.csv /
+>hfds dfs -copyFromLocal <local_dir_path> <hdfs_path>
+<br>Eg; hfds dfs -copyFromLocal /config/workspace/trees.csv /
 
 ## to see the data
->hfds dfs -cat <file-path>
-
-eg; hfds dfs -cat/trees.csv
+>hfds dfs -cat <file_path>
+<br>eg; hfds dfs -cat/trees.csv
 
 >hdfs dfs -ls /test
 
@@ -40,7 +38,7 @@ eg; hfds dfs -cat/trees.csv
 ## accessing the nano editor
 > nano <filename><br>
  press insert in keyboard <br>
- <file-name><br>
+ <file_name><br>
  ctrl +o<br>
  enter <br>
  ctrl+x<br>
@@ -55,13 +53,13 @@ eg; hfds dfs -cat/trees.csv
 
 >hdfs dfs -rm <file or dir_name>
 
->hdfs dfs -rm -r <dir_aoth> 
+>hdfs dfs -rm -r <dir_path> 
 
 ## for file size
 
 >hdfs dfs -du -s <file_path>
 
-## help
+##  For checking all the commands and description write
 
 >hdfs dfs -help
 
@@ -80,4 +78,7 @@ eg; hfds dfs -cat/trees.csv
 -> for Home directory
  hdfs dfs -count /  
 
- 
+ ## Create a file in hdfs
+
+> hdfs dfs -touchz <file_name>
+
