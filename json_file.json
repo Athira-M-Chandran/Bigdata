@@ -1,3 +1,6 @@
 {"name" : "athira","id":1,"skills":["hadoop","python"]}
 {"name" : "sumit", "id":2,"skills":["ml","datascience"]}
 {"name": "amit" , "id" : 3,"skills":["dl","nlp"]}
+
+git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
