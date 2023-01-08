@@ -29,6 +29,14 @@ fields terminated by ',';
     > row format delimited
     > fields terminated by ' , ';
 
+## create a external table in hive
+>eg; create external table ineuron
+    > (emp_id int,
+    > location string,
+    > email_id string)
+    > row format delimited
+    > fields terminated by ' , '
+    > location '/fsdsnov/';
 
 ## describe the table
 > describe formatted ineuron;
@@ -48,3 +56,59 @@ keep your .csv file in the give table location
 
 ## alter the table in hive
 > alter table table_name to new_table_table;
+
+## Show database
+> show databases;
+
+>Create database <databasename>;
+
+>Describe database <databasename>;
+
+>Create database <database name> location “anyhdfslocation”;
+
+>Drop database <databasename>;
+
+## create complex table
+> create table complex_data_type
+    > (
+    > emp_id int,
+    > name map<string,string>
+    > ,
+    > location struct<city:string,pin:int>,
+    > skill_set array<string>
+    > )
+    > row format delimited
+    > fields terminated by ' \t '
+    > collection items terminated by ' , '
+    > location '/fsdsnov/';
+
+>create table emp_details_partition
+>(
+    emp_name string,
+    age int,
+    Exp int
+)
+>Partitioned by (location string)
+>row format delimited
+>fields terminated ' , ';
+
+## create a file and put the record there
+sunny,25,3,bpl
+sudh,30,8,blr
+krish,35,12,blr
+avinash,22,5,hyd
+
+>create table emp_detail_partition
+(
+    emp_name string,
+    age int,
+    exp int,
+    Location string
+)
+row format delimited
+fields terminated ' , ';
+
+<keep your data to this particular table location>
+insert overwrite table emp_detail_partition partition(location) select * from emp_details;
+
+

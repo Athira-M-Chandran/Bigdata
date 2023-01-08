@@ -1,0 +1,3 @@
+sunnysavita,25,3,blr
+sudhkumar,30,8,blr
+krishnaik,35,10,blr

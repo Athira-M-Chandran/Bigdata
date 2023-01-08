@@ -1,0 +1,4 @@
+sunny,25,3,blr
+sudh,30,8,blr
+krish,35,10,blr
+avinash,27,5,hyd
