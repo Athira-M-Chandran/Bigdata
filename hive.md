@@ -81,7 +81,8 @@ keep your .csv file in the give table location
     > fields terminated by ' \t '
     > collection items terminated by ' , '
     > location '/fsdsnov/';
-
+## Partition of the data
+    
 >create table emp_details_partition
 >(
     emp_name string,
@@ -93,22 +94,104 @@ keep your .csv file in the give table location
 >fields terminated ' , ';
 
 ## create a file and put the record there
-sunny,25,3,bpl
-sudh,30,8,blr
-krish,35,12,blr
-avinash,22,5,hyd
+sunny,25,3,bpl<br>
+sudh,30,8,blr<br>
+krish,35,12,blr<br>
+avinash,22,5,hyd<br>
 
+    
+  ## Bucketing
+    
 >create table emp_detail_partition
-(
-    emp_name string,
-    age int,
-    exp int,
-    Location string
-)
-row format delimited
-fields terminated ' , ';
+>(
+ >   emp_name string,
+  >  age int,
+   > exp int,
+    >Location string
+>)
+>row format delimited
+>fields terminated ' , ';
 
 <keep your data to this particular table location>
-insert overwrite table emp_detail_partition partition(location) select * from emp_details;
+>insert overwrite table emp_detail_partition partition(location) select * from emp_details;
 
+Load data local inpath ‘home/cloudera/user.txt’ into table user;
+
+Create table buck_user
+(
+Id int,
+Name string,
+Salary int,
+Dept string
+)
+Clustered by (id)
+Sorted by (id)
+Into 2 buckets;
+
+Set hive.enforce.bucketing=true;
+
+    Select * from buck_user;
+Select * from buck_user TABLESAMPLE(bucket 1 out of 2);
+Select * from buck_user TABLESAMPLE(bucket 2 out of 2);
+
+
+Set mapreduce.job.reduces=3
+—---------------------------------------------------------------------
+
+
+Serde
+
+Csv serde 
+Tsv serde
+Json serde
+Xml serde
+Regex serde
+
+Json serde
+
+Create table json_table
+(
+Name string,
+Id int,
+Skills array<string>
+)
+Row format serde ‘org.apache.hive.hcatalog.data.JsonSerDe’
+Stored as textfile;
+
+
+Hive-hcatalog-core-0.14.0.jar
+
+hive> add jar <jar_file_path>
+
+#Create a json file
+
+{"name":"sunny","id":1,"skills":["haddop","python"]}
+{"name":"sumit","id":2,"skills":["ml","datascience"]}
+{"name":"amit","id":3,"skills":["dl","nlp"]}
+
+#load data from local
+
+Load data local inpath <json file path from local> into table json_table;
+Homework
+
+Regex.txt
+
+host1/ amit @ amit@abc.com
+host2/ sumit @ sumit@abc.com
+host3/ sunny @ sunny@xyz.com
+
+For creating a table.
+
+Create table userlog
+(
+Host string,
+Username string,
+Domain string
+)
+Row format serde ‘org.apache.hadoop.hive.contrib.serde2.RegexSerDe’
+WITH SERDEPROPERTIES(
+‘input .regex’=’(.*)/(.*)@(.*)’,
+‘output.format.string’=’%1$ %2$ %3$’);
+
+If you will issue with respect to jar file add it inside your hive.
 
